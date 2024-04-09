@@ -13,7 +13,7 @@ import time
 import cv2
 
 #シリアル通信の追加 2021/10/04
-#import serial
+import serial
 #ser = serial.Serial('COM5', 115200, timeout=0.1) 
 
 #年月日時分秒の追加 2021/10/04
@@ -102,6 +102,16 @@ while True:
     
     if sleep_count >= 3:
         print("寝てる")
+        ser = serial.Serial('/dev/ttyUSB0', 115200) # デバイス名とボーレートを設定しポートをオープン 
+        # timeout=0.1)入れると # timeoutを秒で設定（default:None)ボーレートはデフォルトで9600
+	    ser.write(b'A') #ESP32にAを送る # 出力 文字送る感じ ほかの例だと("")でいける
+	    print("BUZA ON")
+	    time.sleep(0.5)
+
+        ser.close()
+        print("end")
+    
+    
         #ブザーとスプレッドシート用処理を記述
         sleep_count = 0
     
