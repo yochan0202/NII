@@ -18,7 +18,7 @@ import serial
 
 #年月日時分秒の追加 2021/10/04
 import datetime
-
+import requests
 # カメラバッファ読み飛ばし回数
 CAMERA_BUF_FLUSH_NUM = 6
 
@@ -99,19 +99,25 @@ while True:
     
     if classes[predicted] == classes[1]:
         sleep_count = sleep_count + 1
+        
+    if classes[predicted] == classes[0]
+        sleep_count = 0
     
     if sleep_count >= 3:
         print("寝てる")
-        ser = serial.Serial('/dev/ttyUSB0', 115200) # デバイス名とボーレートを設定しポートをオープン 
-        # timeout=0.1)入れると # timeoutを秒で設定（default:None)ボーレートはデフォルトで9600
-	    ser.write(b'A') #ESP32にAを送る # 出力 文字送る感じ ほかの例だと("")でいける
-	    print("BUZA ON")
-	    time.sleep(0.5)
-
+        
+        ser = serial.Serial('/dev/ttyUSB0', 115200) 
+        
+        ser.write(b'A')
+        print("BUZA ON")
+        time.sleep(0.5)
+        
         ser.close()
         print("end")
-    
-    
+        
+        url = 'https://script.google.com/macros/s/AKfycbxL8ozI0oYF1zourgyGPpodklQvN6kBMR_vaXiAy-OrEqYHWNi0fPJVlL6TNaQ5FhP82w/exec?data1=Sleep'
+        requests.get(url)
+        
         #ブザーとスプレッドシート用処理を記述
         sleep_count = 0
     
